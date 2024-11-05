@@ -15,6 +15,7 @@ let micGainParam;
 let micGainSpan;
 const sizeGrow = 0.3;
 const  speedGrow = 0.05;
+let helpText;
 
 const SAMPLES_2961 = {"sampleSilbatoGrave": "media/audio/2961/2961_largo_suave_grave.wav","sampleSilbatoAgudo": "media/audio/2961/2961_largo_suave_agudo.wav"};
 const sustainLoopPoints = {"grave": [269.5,4930], "agudo": [298.1, 2889]};
@@ -78,7 +79,9 @@ function setup() {
 
     buttons[0] = new Button(windowWidth/2, margin+buttonSize/2,'lowHighNote');
 
-    //createP("gainMicSlider");
+    helpText = createP("Hola! Para comenzar, haz click en el círculo rojo. Luego puedes comenzar a soplar.<br>Mientras haces click en el círculo, se reproduce la nota aguda. Al soltar, se reproduce la nota grave.<br>Puedes controlar el volumen del micrófono con el slider de abajo.");
+    helpText.position(windowWidth*0.1, windowHeight*0.05);
+    helpText.addClass("unselectable");
     micGainSlider = createSlider(-6,12,0,0.1);
     micGainSpan = createSpan("Mic Gain");
     micGainSpan.position(windowWidth-200, windowHeight-70);
