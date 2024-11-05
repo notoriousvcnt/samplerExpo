@@ -40,7 +40,7 @@ async function loadRNBOdevice(){
     device.messageEvent.subscribe((event) => {
         if (event.tag === "out3"){
             micdB = event.payload;
-            micdBSpan.html(micdB.toFixed(2));
+            //micdBSpan.html(micdB.toFixed(2));
         }
 
         if (event.tag === "out4"){
@@ -79,14 +79,14 @@ function setup() {
     buttons[0] = new Button(windowWidth/2, margin+buttonSize/2,'lowHighNote');
 
     //createP("gainMicSlider");
-    // micGainSlider = createSlider(0,12,0.5,0);
-    // micGainSpan = createSpan("Mic Gain");
-    // micGainSpan.position(windowWidth-200, windowHeight-70);
+    micGainSlider = createSlider(-6,12,0,0.1);
+    micGainSpan = createSpan("Mic Gain");
+    micGainSpan.position(windowWidth-200, windowHeight-70);
     // micdBSpan = createSpan("Mic dB Level");
     // micdBSpan.position(windowWidth-300, windowHeight-70);
-    // micGainSlider.position(windowWidth-200, windowHeight-50);
-    // micGainSlider.id("micGainSlider");
-    // micGainSlider.input(displayValue);
+    micGainSlider.position(windowWidth-200, windowHeight-50);
+    micGainSlider.id("micGainSlider");
+    micGainSlider.input(displayValue);
 
     // slider = createSlider(0, 1.5,0.3,0.05);
     // slider.id("size change");
