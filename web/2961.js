@@ -35,7 +35,7 @@ async function loadRNBOdevice(){
 
     
 
-    await loadSamples(device,SAMPLES_2961);
+    await loadSamples(device, SAMPLES_2961, 0.7);
 
     device.messageEvent.subscribe((event) => {
         if (event.tag === "out3"){
@@ -57,6 +57,7 @@ async function loadRNBOdevice(){
     device.node.connect(outputNode);
     
    micGainParam = device.parametersById.get("micGain");
+   micGainParam.value = 6; //hardcoded for samsung galaxy A15
 
     document.body.onclick = () => {
         context.resume(); 
@@ -76,7 +77,7 @@ function setup() {
     separation = windowHeight*0.1;
 
     buttons[0] = new Button(windowWidth/2, margin+buttonSize/2,'lowHighNote');
-    
+
     //createP("gainMicSlider");
     // micGainSlider = createSlider(0,12,0.5,0);
     // micGainSpan = createSpan("Mic Gain");
@@ -205,13 +206,13 @@ class Button{
 
 
 //RNBO Functions
-async function loadSamples(device,samples){
+async function loadSamples(device,samples, normalizeFactor){
     for (let id in samples){
         const url = samples[id];
         await loadSample(url,id,device);
     }
     //enableButtons();
-    sendMessageToInport(1,"normalizeSampleBuffer");
+    sendMessageToInport(normalizeFactor,"normalizeSampleBuffer");
 }
 
 async function loadSample(url,id,device){
