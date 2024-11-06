@@ -69,141 +69,141 @@ async function loadRNBOdevice(){
 
 loadRNBOdevice();
 
-// function setup() {
-//     createCanvas(windowWidth, windowHeight);
-//     margin = windowHeight*0.2;
-//     buttonSize = windowHeight*0.2;
-//     separation = windowHeight*0.1;
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+    margin = windowHeight*0.2;
+    buttonSize = windowHeight*0.2;
+    separation = windowHeight*0.1;
 
-//     buttons[0] = new Button(windowWidth/2, margin+buttonSize/2,'lowHighNote');
+    buttons[0] = new Button(windowWidth/2, margin+buttonSize/2,'lowHighNote');
 
-//     helpText = createP("Hola! Para comenzar, haz click en el círculo rojo. Luego puedes comenzar a soplar.<br>Mientras haces click en el círculo, se reproduce la nota aguda. Al soltar, se reproduce la nota grave.<br>Puedes controlar el volumen del micrófono con el slider de abajo.");
-//     helpText.position(windowWidth*0.1, windowHeight*0.05);
-//     helpText.addClass("unselectable");
-//     micGainSlider = createSlider(-6,12,0,0.1);
-//     micGainSpan = createSpan("Mic Gain");
-//     micGainSpan.addClass("unselectable");
-//     micGainSpan.position(windowWidth-200, windowHeight-70);
-//     micdBSpan = createSpan("Mic dB Level");
-//     micdBSpan.addClass("unselectable");
-//     micdBSpan.position(windowWidth-300, windowHeight-70);
-//     micGainSlider.position(windowWidth-200, windowHeight-50);
-//     micGainSlider.id("micGainSlider");
-//     micGainSlider.input(displayValue);
+    helpText = createP("Hola! Para comenzar, haz click en el círculo rojo. Luego puedes comenzar a soplar.<br>Mientras haces click en el círculo, se reproduce la nota aguda. Al soltar, se reproduce la nota grave.<br>Puedes controlar el volumen del micrófono con el slider de abajo.");
+    helpText.position(windowWidth*0.1, windowHeight*0.05);
+    helpText.addClass("unselectable");
+    micGainSlider = createSlider(-6,12,0,0.1);
+    micGainSpan = createSpan("Mic Gain");
+    micGainSpan.addClass("unselectable");
+    micGainSpan.position(windowWidth-200, windowHeight-70);
+    micdBSpan = createSpan("Mic dB Level");
+    micdBSpan.addClass("unselectable");
+    micdBSpan.position(windowWidth-300, windowHeight-70);
+    micGainSlider.position(windowWidth-200, windowHeight-50);
+    micGainSlider.id("micGainSlider");
+    micGainSlider.input(displayValue);
 
-//     // slider = createSlider(0, 1.5,0.3,0.05);
-//     // slider.id("size change");
-//     // slider.input(displayValue);
-//     // slider.position(10, windowHeight);
-//     // slider.size(80);
+    // slider = createSlider(0, 1.5,0.3,0.05);
+    // slider.id("size change");
+    // slider.input(displayValue);
+    // slider.position(10, windowHeight);
+    // slider.size(80);
 
-//     // speedSlider = createSlider(0, 1,0.05,0.05);
-//     // speedSlider.id("speed change");
-//     // speedSlider.input(displayValue);
-//     // speedSlider.position(100, windowHeight);
-//     // speedSlider.size(80);
+    // speedSlider = createSlider(0, 1,0.05,0.05);
+    // speedSlider.id("speed change");
+    // speedSlider.input(displayValue);
+    // speedSlider.position(100, windowHeight);
+    // speedSlider.size(80);
    
-//     console.log('hi :)!'); 
-//     textSize(60);
-//     noLoop();
-// }
+    console.log('hi :)!'); 
+    textSize(60);
+    noLoop();
+}
 
-// function displayValue(){
-//     console.log(this.id(),this.value());
+function displayValue(){
+    console.log(this.id(),this.value());
 
-//     if (this.id() == "micGainSlider"){
-//         micGainParam.value = this.value();
-//         micGainSpan.html(this.value().toFixed(2) + ' dB');
-//     }
-// }
+    if (this.id() == "micGainSlider"){
+        micGainParam.value = this.value();
+        micGainSpan.html(this.value().toFixed(2) + ' dB');
+    }
+}
 
-// function windowResized(){
-//     resizeCanvas(windowWidth, windowHeight);
-// }
+function windowResized(){
+    resizeCanvas(windowWidth, windowHeight);
+}
 
-// function draw() {
-//     background(220);
-//     fill(0);
-//     let micdBMapped;
-//     if (device){	
-//         //text(micdB, windowWidth/2-margin, margin*3);
-//         micdBMapped = map(micdB,-60,0,1,1.5,true);
-//         //micdBSpan.html(micdB);
-//     }
+function draw() {
+    background(220);
+    fill(0);
+    let micdBMapped;
+    if (device){	
+        //text(micdB, windowWidth/2-margin, margin*3);
+        micdBMapped = map(micdB,-60,0,1,1.5,true);
+        //micdBSpan.html(micdB);
+    }
     
-//     for (let button of buttons){
-//         button.show(micdBMapped);
-//         button.isPressed();
-//         button.sendBang();
-//     }
-// }
+    for (let button of buttons){
+        button.show(micdBMapped);
+        button.isPressed();
+        button.sendBang();
+    }
+}
 
-// class Button{
-//     constructor(x,y,inportTag){
-//         this.x = x;
-//         this.y = y;
-//         this.size = buttonSize;
-//         this.colour = color(255,0,0);
-//         this.state = 0;
-//         this.lastState = 0;
-//         this.inportTag = inportTag;
-//     }
+class Button{
+    constructor(x,y,inportTag){
+        this.x = x;
+        this.y = y;
+        this.size = buttonSize;
+        this.colour = color(255,0,0);
+        this.state = 0;
+        this.lastState = 0;
+        this.inportTag = inportTag;
+    }
 
-//     show(factor){
-//         let Anoise;
-//         let amplitude = this.size*sizeGrow;
-//         let speed = speedGrow; 
-//         //console.log(amplitude);
-//         noStroke();
-//         fill(this.colour);
-//         beginShape();
-//         for (let i = 0; i < 100; i+=1){
-//             if (noteStatus == 1){
-//                 Anoise = amplitude*noise(speed * frameCount);
-//             } else {    
-//                 Anoise = 1;
-//                 speed = speed - 0.01;
-//             }
-//             let angle = map(i,0,100,0,TWO_PI);
-//             let size = this.size/2 + Anoise;
-//             let x =  this.x + cos(angle)*size;
-//             let y =  this.y + sin(angle)*size;
-//             vertex(x,y);
+    show(factor){
+        let Anoise;
+        let amplitude = this.size*sizeGrow;
+        let speed = speedGrow; 
+        //console.log(amplitude);
+        noStroke();
+        fill(this.colour);
+        beginShape();
+        for (let i = 0; i < 100; i+=1){
+            if (noteStatus == 1){
+                Anoise = amplitude*noise(speed * frameCount);
+            } else {    
+                Anoise = 1;
+                speed = speed - 0.01;
+            }
+            let angle = map(i,0,100,0,TWO_PI);
+            let size = this.size/2 + Anoise;
+            let x =  this.x + cos(angle)*size;
+            let y =  this.y + sin(angle)*size;
+            vertex(x,y);
   
-//         }
-//         endShape(CLOSE);
-//         // noStroke();
-//         // fill(this.colour);
-//         // beginShape();
-//         // for (let i = 0; i < 100; i++){
-//         //     let angle = map(i,0,100,0,TWO_PI);
-//         //     let realSize = this.size/2 * factor;
-//         //     let x = this.x + realSize * cos(angle);
-//         //     let y = this.y + realSize * sin(angle);
-//         //     vertex(x,y);
-//         // }
-//         // endShape(CLOSE);
-//     }
+        }
+        endShape(CLOSE);
+        // noStroke();
+        // fill(this.colour);
+        // beginShape();
+        // for (let i = 0; i < 100; i++){
+        //     let angle = map(i,0,100,0,TWO_PI);
+        //     let realSize = this.size/2 * factor;
+        //     let x = this.x + realSize * cos(angle);
+        //     let y = this.y + realSize * sin(angle);
+        //     vertex(x,y);
+        // }
+        // endShape(CLOSE);
+    }
 
-//     isPressed(){
-//         let mouseRadius = dist(this.x,this.y,mouseX,mouseY);
-//         this.lastState = this.state;
-//         if (mouseRadius <= buttonSize/2 && mouseIsPressed){
-//             this.colour = color(255,0,0);
-//             this.state = 1;
-//         } else {
-//             this.colour = color(255,255,255);
-//             this.state = 0;
-//         }
-//     }
+    isPressed(){
+        let mouseRadius = dist(this.x,this.y,mouseX,mouseY);
+        this.lastState = this.state;
+        if (mouseRadius <= buttonSize/2 && mouseIsPressed){
+            this.colour = color(255,0,0);
+            this.state = 1;
+        } else {
+            this.colour = color(255,255,255);
+            this.state = 0;
+        }
+    }
 
-//     sendBang(){
-//         if (this.state != this.lastState){
-//             //console.log('bang');
-//             sendMessageToInport(this.state,this.inportTag);
-//         }
-//     }
-// }
+    sendBang(){
+        if (this.state != this.lastState){
+            //console.log('bang');
+            sendMessageToInport(this.state,this.inportTag);
+        }
+    }
+}
 
 
 
